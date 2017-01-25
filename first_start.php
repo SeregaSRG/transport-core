@@ -1,0 +1,3 @@
+<?php
+// TODO адекватная таблица...
+//unlink(HOME_DIR.'/first_start.php');
