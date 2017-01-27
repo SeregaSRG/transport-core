@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ae65f81d-f1db-4388-8d14-1cf6d37270a7" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/actions/Location.php" afterPath="$PROJECT_DIR$/application/actions/Location.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/actions/User.php" afterPath="$PROJECT_DIR$/application/actions/User.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/action.php" afterPath="$PROJECT_DIR$/application/core/action.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/domain.php" afterPath="$PROJECT_DIR$/application/core/domain.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/core/responder.php" afterPath="$PROJECT_DIR$/application/core/responder.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/domains/Location.php" afterPath="$PROJECT_DIR$/application/domains/Location.php" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/application/domains/User.php" afterPath="$PROJECT_DIR$/application/domains/User.php" />
-    </list>
+    <list default="true" id="ae65f81d-f1db-4388-8d14-1cf6d37270a7" name="Default" comment="" />
     <ignored path="transport-core.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -201,12 +192,12 @@
       <workItem from="1485351000350" duration="90000" />
       <workItem from="1485351176622" duration="25000" />
       <workItem from="1485355631411" duration="671000" />
-      <workItem from="1485500069124" duration="1274000" />
+      <workItem from="1485500069124" duration="1834000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="2060000" />
+    <option name="totallyTimeSpent" value="2620000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
