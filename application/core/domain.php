@@ -1,8 +1,10 @@
 <?php
-class Domain {
+class Domain 
+{
     
     public $connection;
     
-    function __construct() {
+    function __construct() 
+    {
     }    
 }

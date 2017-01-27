@@ -1,22 +1,10 @@
 <?php 
-class Domain_User {
-
-    //http://transport-core.microfox.ru/api/user.login?phone=89094294989&password=123
-    //http://transport-core.microfox.ru/api/user.register?phone=89094294989&password=123
+class Domain_User
+{
     public $user;
 
-    public $isRegistered = FALSE;
-    public $registeredCode;
-
-
-    public $isLogged = FALSE;
-    public $loggedCode;
-
-    public $isChecked = FALSE;
-    public $checkedCode;
-
-
-    function register() {
+    public function register() 
+    {
         global $pdo;
         $result = [];
 
@@ -27,17 +15,28 @@ class Domain_User {
         $phone			= Parameters::Get('phone');
         $password_hash	= crypt($password, SALT);
 
-        $isUserQuery = $pdo->prepare(
-            "SELECT id FROM `clients` WHERE phone = :phone"
-        );
+        $isUserQuery = $pdo->prepare("
+          SELECT 
+          id 
+          FROM 
+          `clients` 
+          WHERE 
+          phone = :phone
+        ");
+        
         $isUserQuery->execute([
             ':phone' => $phone
         ]);
 
         if (!$isUserQuery->rowCount()){
-            $addUserQuery = $pdo->prepare(
-                "INSERT INTO `clients` (`name`, `surname`, `email`, `phone`, `password`) VALUES (:name, :surname, :email, :phone, :password_hash)"
-            );
+            $addUserQuery = $pdo->prepare("
+              INSERT INTO 
+                `clients` 
+                (`name`, `surname`, `email`, `phone`, `password`)
+              VALUES 
+                (:name, :surname, :email, :phone, :password_hash)
+            ");
+            
             $addUserQuery->execute([
                 ':name'          => $name,
                 ':surname'       => $surname,
@@ -45,22 +44,24 @@ class Domain_User {
                 ':phone'         => $phone,
                 ':password_hash' => $password_hash
             ]);
+            
             if ($addUserQuery){
-                $result['isRegistered'] = TRUE;
+                $result['isRegistered'] = true;
                 $result['registeredCode'] = 100;
             } else {
-                $result['isRegistered'] = TRUE;
+                $result['isRegistered'] = false;
                 $result['registeredCode'] = -2;
             }
         } else {
-            $result['isRegistered'] = FALSE;
+            $result['isRegistered'] = false;
             $result['registeredCode'] = 101;
         }
 
         return $result;
     }
 
-    function login() {
+    public function login() 
+    {
         $result = [];
         $password   = Parameters::Get('password');
         $phone      = Parameters::Get('phone');
@@ -76,7 +77,12 @@ class Domain_User {
                     'user_agent' => $_SERVER['HTTP_USER_AGENT']
                 ];
 
-                Token::insert($_SESSION['now_user'][id], $_SESSION['now_user'][token], $_SESSION['now_user'][ip], $_SESSION['now_user'][user_agent]);
+                Token::insert(
+                    $_SESSION['now_user']['id'], 
+                    $_SESSION['now_user']['token'], 
+                    $_SESSION['now_user']['ip'], 
+                    $_SESSION['now_user']['user_agent']
+                );
 
                 $result['isLogged'] = true;
                 $result['loginCode'] = 200;
@@ -91,13 +97,11 @@ class Domain_User {
         return $result;
     }
 
-    function checkLogin() {
+    public function checkLogin() {
         $result = [];
         $token = Parameters::Get('token');
         
-        $this->isChecked = Token::checkToken($token, $_SERVER['HTTP_USER_AGENT']);
-
-        if ($this->isChecked) {
+        if ( Token::checkToken($token, $_SERVER['HTTP_USER_AGENT']) ) {
             $result['checkedCode'] = '300';
         } else {
             $result['checkedCode'] = '301';
@@ -106,49 +110,34 @@ class Domain_User {
         return $result;
     }
 
-    function checkPassword($password) {
+    public function checkPassword($password) {
         if ( hash_equals( $this->user->password, crypt($password, SALT)) ) {
-            return TRUE;
+            return true;
         } else {
-            return FALSE;
+            return false;
         }
     }
 
-    function getUserInfo($phone) {
+    public function getUserInfo($phone) {
         global $pdo;
 
-        $userInfoQuery = $pdo->prepare(
-            "SELECT * FROM `clients` WHERE phone = :phone"
-        );
-
+        $userInfoQuery = $pdo->prepare("
+          SELECT 
+          * 
+          FROM 
+          `clients` 
+          WHERE 
+          phone = :phone
+        ");
+        
         $userInfoQuery->execute([
             ':phone' => $phone
         ]);
-
-        // Возвращает объект или false
+        
         if ($userInfoQuery->rowCount()){
             return $userInfoQuery->fetch();
         } else {
-            return FALSE;
-        }
-    }
-
-    function getUserInfoByToken($token) {
-        global $pdo;
-
-        $userInfoQuery = $pdo->prepare(
-            "SELECT * FROM `clients` WHERE phone = :phone"
-        );
-
-        $userInfoQuery->execute([
-            ':phone' => $phone
-        ]);
-
-        // Возвращает объект или false
-        if ($userInfoQuery->rowCount()){
-            return $userInfoQuery->fetch();
-        } else {
-            return FALSE;
+            return false;
         }
     }
 }

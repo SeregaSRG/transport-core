@@ -2,7 +2,7 @@
 class Domain_Location extends Domain
 {
 
-    function add()
+    public function add()
     {
         global $pdo;
 
@@ -57,7 +57,7 @@ class Domain_Location extends Domain
         return $result;
     }
 
-    function get()
+    public function get()
     {
         global $pdo;
 

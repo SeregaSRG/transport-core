@@ -1,12 +1,15 @@
 <?php
-class Action_User extends Action {
+class Action_User extends Action 
+{
 
-    function __construct() {
+    function __construct() 
+    {
         $this->domain = new Domain_User();
         $this->responder = new Responder();
     }
 
-    function register() {
+    function register() 
+    {
         $result = $this->domain->register();
 
         if ($result['isRegistered']) {
@@ -23,19 +26,20 @@ class Action_User extends Action {
         exit();
     }
 
-    function login() {
+    function login() 
+    {
         $result = $this->domain->login();
 
-        if ($result[isLogged]) {
+        if ($result['isLogged']) {
             Responder::send([
-                'token' => $_SESSION['now_user'][token],
+                'token' => $_SESSION['now_user']['token'],
                 'name'  => $this->domain->user->name,
                 'surname'  => $this->domain->user->surname,
                 'email'  => $this->domain->user->email
             ]);
         } else {
             Responder::error(
-                $result[loggedCode]
+                $result['loggedCode']
             );
             session_destroy();
         }
@@ -43,7 +47,8 @@ class Action_User extends Action {
         exit();
     }
 
-    function checkLogin() {
+    function checkLogin() 
+    {
         $result = $this->domain->checkLogin();
             
         if ($this->domain->isChecked) {

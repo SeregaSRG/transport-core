@@ -1,12 +1,14 @@
 <?php
-class Action_Location extends Action {
+class Action_Location extends Action 
+{
 
-    function __construct() {
+    function __construct() 
+    {
         $this->domain = new Domain_Location();
         $this->responder = new Responder();
     }
 
-    function add()
+    public function add()
     {
         $result = $this->domain->add();
 
@@ -22,8 +24,8 @@ class Action_Location extends Action {
         
         exit();
     }
-    
-    function get()
+
+    public function get()
     {
         $result = $this->domain->get();
         
